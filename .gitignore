@@ -13,3 +13,4 @@ target
 nb-configuration.xml
 
 src/main/java/entities/Customer.java
+/The-facade-and-the-matching-endpoints/nbproject/
