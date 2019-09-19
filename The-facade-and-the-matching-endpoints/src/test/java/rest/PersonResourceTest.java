@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.grizzly.http.server.HttpServer;
+import static org.glassfish.grizzly.http.util.Header.ContentType;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -19,7 +20,6 @@ import static org.hamcrest.Matchers.equalTo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
@@ -36,6 +36,7 @@ public class PersonResourceTest {
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
+    private static Person p1, p2;
 
     static HttpServer startServer() {
         ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
@@ -44,10 +45,8 @@ public class PersonResourceTest {
 
     @BeforeAll
     public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.CREATE);
+        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.DROP_AND_CREATE);
 
-        //NOT Required if you use the version of EMF_Creator.createEntityManagerFactory used above        
-        //System.setProperty("IS_TEST", TEST_DB);
         //We are using the database on the virtual Vagrant image, so username password are the same for all dev-databases
         httpServer = startServer();
 
@@ -60,7 +59,6 @@ public class PersonResourceTest {
 
     @AfterAll
     public static void closeTestServer() {
-        //System.in.read();
         httpServer.shutdownNow();
     }
 
@@ -68,11 +66,12 @@ public class PersonResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        p1 = new Person("firstName", "lastName", "phone");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-            em.persist(new Person("firstName", "lastName", "phone", LocalDate.of(2000, Month.JANUARY, 1)));
-
+            em.persist(p1);
+            em.persist(p2);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -82,7 +81,11 @@ public class PersonResourceTest {
 //    @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/api").then().statusCode(200);
+        given()
+                .when()
+                .get("/api/person")
+                .then()
+                .statusCode(200);
     }
 
 //    @Test
@@ -92,8 +95,26 @@ public class PersonResourceTest {
                 .get("/api/person/1").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("data.firstName", equalTo("Hans"));
+                .body("firstName", equalTo("firstName"));
     }
+
+    private static String payload = "{\n"
+            + "  \"description\": \"Some Description\",\n"
+            + "  \"id\": \"Some id\",\n"
+            + "  \"name\": \"Some name\"\n"
+            + "}";
+
+//    @Test
+//    public void testPOST() throws Exception {
+//        given()
+//                .contentType(ContentType.)
+//                .body(payload)
+//                .post("/some/resource")
+//                .then()
+//                .statusCode(200)
+//                .extract()
+//                .response();
+//    }
 
 //    @Test
 //    public void testDummyMsg() throws Exception {

@@ -26,11 +26,10 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String phone, LocalDate lastEdited) {
+    public Person(String firstName, String lastName, String phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
-        this.lastEdited = lastEdited;
     }
 
     public Integer getId() {

@@ -10,20 +10,20 @@ import java.util.Objects;
 public class PersonDTO {
 
     private long id;
-    private String fName;
-    private String lName;
+    private String firstName;
+    private String lastName;
     private String phone;
 
     public PersonDTO(Person p) {
-        this.fName = p.getFirstName();
-        this.lName = p.getLastName();
+        this.firstName = p.getFirstName();
+        this.lastName = p.getLastName();
         this.phone = p.getPhone();
         this.id = p.getId();
     }
 
     public PersonDTO(String fn, String ln, String phone) {
-        this.fName = fn;
-        this.lName = ln;
+        this.firstName = fn;
+        this.lastName = ln;
         this.phone = phone;
     }
 
@@ -38,20 +38,20 @@ public class PersonDTO {
         this.id = id;
     }
 
-    public String getfName() {
-        return fName;
+    public String getfirstName() {
+        return firstName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
+    public void setfirstName(String fName) {
+        this.firstName = fName;
     }
 
-    public String getlName() {
-        return lName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
+    public void setlastName(String lName) {
+        this.lastName = lName;
     }
 
     public String getPhone() {
@@ -66,8 +66,8 @@ public class PersonDTO {
     public int hashCode() {
         int hash = 7;
         hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 11 * hash + Objects.hashCode(this.fName);
-        hash = 11 * hash + Objects.hashCode(this.lName);
+        hash = 11 * hash + Objects.hashCode(this.firstName);
+        hash = 11 * hash + Objects.hashCode(this.lastName);
         hash = 11 * hash + Objects.hashCode(this.phone);
         return hash;
     }
@@ -87,10 +87,10 @@ public class PersonDTO {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.fName, other.fName)) {
+        if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
-        if (!Objects.equals(this.lName, other.lName)) {
+        if (!Objects.equals(this.lastName, other.lastName)) {
             return false;
         }
         if (!Objects.equals(this.phone, other.phone)) {
@@ -101,7 +101,7 @@ public class PersonDTO {
 
     @Override
     public String toString() {
-        return "PersonDTO{" + "id=" + id + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + '}';
+        return "PersonDTO{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + '}';
     }
     
 }

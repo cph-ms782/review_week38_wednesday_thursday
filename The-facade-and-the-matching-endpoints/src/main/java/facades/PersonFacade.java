@@ -40,7 +40,7 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public Person addPerson(String fName, String lName, String phone) {
-        Person person = new Person(fName, lName, phone, LocalDate.now());
+        Person person = new Person(fName, lName, phone);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

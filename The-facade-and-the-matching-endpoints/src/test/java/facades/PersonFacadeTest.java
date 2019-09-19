@@ -21,8 +21,9 @@ public class PersonFacadeTest {
     private static EntityManagerFactory emf;
     private static PersonFacade facade;
 
-    private static Person p1 = new Person("a", "b", "c", LocalDate.of(2000, Month.JANUARY, 1));
-    private static Person p2 = new Person("d", "e", "f", LocalDate.of(2010, Month.JULY, 15));
+    private static Person p1;
+    private static Person p2;
+    private static Person p3;
 
     public PersonFacadeTest() {
     }
@@ -47,10 +48,14 @@ public class PersonFacadeTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        p1 = new Person("a", "b", "c");
+        p2 = new Person("d", "e", "f");
+        p3 = new Person("g", "i", "j");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
             em.persist(p1);
+            em.persist(p2);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -65,13 +70,13 @@ public class PersonFacadeTest {
     @Test
     public void testGetPerson() {
         System.out.println("Test getPerson:");
-        assertEquals(p1, facade.getPerson(6), "Expects 2 persons to be the same");
+        assertEquals(p1, facade.getPerson(p1.getId()), "Expects 2 persons to be the same");
     }
 
     @Test
     public void testGetAllPersons() {
         System.out.println("Test getAllPersons:");
-        assertEquals(1, facade.getAllPersons().size(), "Expects a list of 1 person");
+        assertEquals(2, facade.getAllPersons().size(), "Expects a list of 2 persons");
     }
 
     @Test
@@ -81,20 +86,26 @@ public class PersonFacadeTest {
                 p2.getFirstName(),
                 p2.getLastName(),
                 p2.getPhone());
-        assertEquals(2, facade.getAllPersons().size(), "Expects a list of 2 persons");
+        assertEquals(3, facade.getAllPersons().size(), "Expects a list of 3 persons");
     }
 
     @Test
     public void testDeletePerson() {
         System.out.println("Test deletePerson:");
-        facade.deletePerson(2);
-        assertEquals(0, facade.getAllPersons().size(), "Expects a list of 0 persons");
+        facade.deletePerson(p2.getId());
+        assertEquals(1, facade.getAllPersons().size(), "Expects a list of 1 person");
     }
 
     @Test
     public void testEditPerson() {
         System.out.println("Test editPerson:");
-        assertEquals(1, facade.getAllPersons().size(), "Expects a list of 2 persons");
+        Person p = facade.getPerson(p1.getId());
+        p.setFirstName("x");
+        p.setLastName("y");
+        p.setPhone("z");
+        Person person = facade.editPerson(p);
+        
+        assertEquals(person, facade.getPerson(p1.getId()), "Expects 2 persons to be the same");
     }
 
 }
