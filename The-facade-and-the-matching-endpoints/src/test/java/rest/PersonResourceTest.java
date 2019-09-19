@@ -91,7 +91,17 @@ public class PersonResourceTest {
                 .then()
                 .statusCode(200);
     }
-
+    
+    @Test
+    public void testPersonNotFoundException() {
+        System.out.println("Testing is server UP");
+        given()
+                .when()
+                .get("/person/121233")
+                .then()
+                .statusCode(404);
+    }
+    
     @Test
     public void testGetPersonByID() throws Exception {
         System.out.println("Testing GetPersonByID");

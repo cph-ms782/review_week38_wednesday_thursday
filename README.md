@@ -36,15 +36,14 @@ _***Person DB created on localhost**_
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L55)  
  [REST](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/rest/PersonResource.java#L69)  
 
+### Rest Assured Tests  
+For each of the REST-endpoints created above, implement one (or more) Rest Assured test which should mirror the way you initially tested the endpoint using Postman  
+[REST assured tests](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/e2aeff08bd2bb68492d4b4cd8620477e905111a3/The-facade-and-the-matching-endpoints/src/test/java/rest/PersonResourceTest.java#L95)  
+
+
 ### Error Handling with JAX RS and ExceptionMappers  
-1) Add the following Exceptions to the system  
-
-
-2) Change the interface (and implementation) as sketched  
-
-
-
 3) Test your error responses, first using Postman, and then with JUnit and Rest Assured.  
+[Test for ]()
 
 
 

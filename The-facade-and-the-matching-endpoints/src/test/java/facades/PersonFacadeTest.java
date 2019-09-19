@@ -2,6 +2,7 @@ package facades;
 
 import utils.EMF_Creator;
 import entities.Person;
+import exceptions.PersonNotFoundException;
 import java.time.LocalDate;
 import java.time.Month;
 import javax.persistence.EntityManager;
@@ -68,7 +69,7 @@ public class PersonFacadeTest {
     }
 
     @Test
-    public void testGetPerson() {
+    public void testGetPerson() throws PersonNotFoundException {
         System.out.println("Test getPerson:");
         assertEquals(p1, facade.getPerson(p1.getId()), "Expects 2 persons to be the same");
     }
@@ -90,14 +91,14 @@ public class PersonFacadeTest {
     }
 
     @Test
-    public void testDeletePerson() {
+    public void testDeletePerson() throws PersonNotFoundException {
         System.out.println("Test deletePerson:");
         facade.deletePerson(p2.getId());
         assertEquals(1, facade.getAllPersons().size(), "Expects a list of 1 person");
     }
 
     @Test
-    public void testEditPerson() {
+    public void testEditPerson() throws PersonNotFoundException {
         System.out.println("Test editPerson:");
         Person p = facade.getPerson(p1.getId());
         p.setFirstName("x");
