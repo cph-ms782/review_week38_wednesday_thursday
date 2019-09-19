@@ -41,8 +41,8 @@ public class PersonFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.persist(p2);
             em.persist(p1);
-//            em.persist(p2);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -68,7 +68,13 @@ public class PersonFacadeTest {
     @Test
     public void testGetPerson() {
         System.out.println("Test getPerson:");
-        assertEquals(p1, facade.getPerson(1), "Expects 2 p1 persons");
+        assertEquals(p1, facade.getPerson(2), "Expects 2 persons to be the same");
+    }
+
+    @Test
+    public void testGetAllPersons() {
+        System.out.println("Test getAllPersons:");
+        assertEquals(2, facade.getAllPersons().size(), "Expects a list of 2 persons");
     }
 
 }

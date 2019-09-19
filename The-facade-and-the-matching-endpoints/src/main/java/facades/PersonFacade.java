@@ -4,6 +4,7 @@ import entities.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -58,7 +59,13 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public List<Person> getAllPersons() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Person> num = em.createQuery("Select c from Person c", Person.class);
+            return num.getResultList();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
