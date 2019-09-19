@@ -100,21 +100,21 @@ public class Person implements Serializable {
             return false;
         }
         final Person other = (Person) obj;
-        if (!Objects.equals(this.firstName, other.firstName)) {
-            return false;
-        }
-        if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        if (!Objects.equals(this.phone, other.phone)) {
-            return false;
-        }
+//        if (!Objects.equals(this.firstName, other.firstName)) {
+//            return false;
+//        }
+//        if (!Objects.equals(this.lastName, other.lastName)) {
+//            return false;
+//        }
+//        if (!Objects.equals(this.phone, other.phone)) {
+//            return false;
+//        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.lastEdited, other.lastEdited)) {
-            return false;
-        }
+//        if (!Objects.equals(this.lastEdited, other.lastEdited)) {
+//            return false;
+//        }
         return true;
     }
     

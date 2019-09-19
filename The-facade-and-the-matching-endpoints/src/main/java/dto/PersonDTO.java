@@ -87,15 +87,15 @@ public class PersonDTO {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.firstName, other.firstName)) {
-            return false;
-        }
-        if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
-        if (!Objects.equals(this.phone, other.phone)) {
-            return false;
-        }
+//        if (!Objects.equals(this.firstName, other.firstName)) {
+//            return false;
+//        }
+//        if (!Objects.equals(this.lastName, other.lastName)) {
+//            return false;
+//        }
+//        if (!Objects.equals(this.phone, other.phone)) {
+//            return false;
+//        }
         return true;
     }
 

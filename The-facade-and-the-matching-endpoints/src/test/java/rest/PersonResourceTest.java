@@ -1,22 +1,25 @@
 package rest;
 
+import dto.PersonDTO;
 import entities.Person;
 import utils.EMF_Creator;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
+import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import java.net.URI;
-import java.time.LocalDate;
-import java.time.Month;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.grizzly.http.server.HttpServer;
-import static org.glassfish.grizzly.http.util.Header.ContentType;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,7 +69,8 @@ public class PersonResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        p1 = new Person("firstName", "lastName", "phone");
+        p1 = new Person("a", "b", "c");
+        p2 = new Person("d", "e", "f");
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
@@ -78,60 +82,88 @@ public class PersonResourceTest {
         }
     }
 
-//    @Test
+    @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
         given()
                 .when()
-                .get("/api/person")
+                .get("/person")
                 .then()
                 .statusCode(200);
     }
 
-//    @Test
-    public void testId() throws Exception {
+    @Test
+    public void testGetPersonByID() throws Exception {
+        System.out.println("Testing GetPersonByID");
+        String getString = "/person/" + p1.getId();
         given()
                 .contentType("application/json")
-                .get("/api/person/1").then()
+                .get(getString)
+                .then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("firstName", equalTo("firstName"));
+                .body("firstName", equalTo("a"));
+
     }
 
-    private static String payload = "{\n"
-            + "  \"description\": \"Some Description\",\n"
-            + "  \"id\": \"Some id\",\n"
-            + "  \"name\": \"Some name\"\n"
-            + "}";
+    @Test
+    public void testGetAllPersons() {
+        System.out.println("Testing GetAllPersons");
+        List<PersonDTO> personsDTOs;
+        personsDTOs = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/person/all")
+                .then()
+                .extract()
+                .body()
+                .jsonPath()
+                .getList("all", PersonDTO.class);
 
-//    @Test
-//    public void testPOST() throws Exception {
-//        given()
-//                .contentType(ContentType.)
-//                .body(payload)
-//                .post("/some/resource")
-//                .then()
-//                .statusCode(200)
-//                .extract()
-//                .response();
-//    }
+        PersonDTO p1DTO = new PersonDTO(p1);
+        PersonDTO p2DTO = new PersonDTO(p2);
+        assertThat(personsDTOs, containsInAnyOrder(p1DTO, p2DTO));
+    }
 
-//    @Test
-//    public void testDummyMsg() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/api/person").then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("msg", equalTo("Hello World"));   
-//    }
-//    @Test
-//    public void testCount() throws Exception {
-//        given()
-//        .contentType("application/json")
-//        .get("/api/person").then()
-//        .assertThat()
-//        .statusCode(HttpStatus.OK_200.getStatusCode())
-//        .body("count", equalTo(2));   
-//    }
+    @Test
+    public void testPOST() {
+        System.out.println("Testing POST - addPerson");
+        given()
+                .contentType(ContentType.JSON)
+                .body(new PersonDTO("ib", "xxx", "123"))
+                .when()
+                .post("person")
+                .then()
+                .body("firstName", equalTo("ib"))
+                .body("lastName", equalTo("xxx"))
+                .body("id", notNullValue());
+    }
+
+    @Test
+    public void testPUT() {
+        System.out.println("Testing PUT - editPerson");
+        String getString = "person/" + p1.getId();
+        given()
+                .contentType(ContentType.JSON)
+                .body(new PersonDTO("ib", "xxx", "123"))
+                .when()
+                .put(getString)
+                .then()
+                .body("firstName", equalTo("ib"))
+                .body("lastName", equalTo("xxx"))
+                .body("id", notNullValue());
+    }
+
+    @Test
+    public void testDELETE() {
+        System.out.println("Testing DELETE - deletePerson");
+        String getString = "person/" + p1.getId();
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .delete(getString)
+                .then()
+                .body("Status", equalTo("Person deleted"));
+
+    }
 }

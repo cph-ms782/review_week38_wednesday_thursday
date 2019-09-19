@@ -7,6 +7,7 @@ import dto.PersonsDTO;
 import entities.Person;
 import utils.EMF_Creator;
 import facades.PersonFacade;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -63,16 +64,18 @@ public class PersonResource {
     @Path("{id}")
     public String editPerson(String personAsJson, @PathParam("id") int id) {
         Person newPerson = GSON.fromJson(personAsJson, Person.class);
+        newPerson.setId(id);
+        newPerson.setLastEdited(LocalDate.now());
         Person changedPerson = FACADE.editPerson(newPerson);
         return GSON.toJson(new PersonDTO(changedPerson));
     }
-    
+
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     @Path("{id}")
     public String deletePerson(@PathParam("id") int id) {
-        Person pOriginal = FACADE.deletePerson(id);
+        FACADE.deletePerson(id);
         return "{\"Status\" : \"Person deleted\"}";
     }
-    
+
 }
