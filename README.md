@@ -43,7 +43,7 @@ For each of the REST-endpoints created above, implement one (or more) Rest Assur
 
 ### Error Handling with JAX RS and ExceptionMappers  
 3) Test your error responses, first using Postman, and then with JUnit and Rest Assured.  
-[Test for ]()
+[Test for PersonNotFound]()
 
 
 
