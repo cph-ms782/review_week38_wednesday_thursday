@@ -13,18 +13,20 @@ __
 
  4) Complete the GET methods in the facade, and implementing matching REST endpoints. Test via a browser or Postman (Rest Assured will be requested later).  
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L69)  
- [REST]()  
+ [REST](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/rest/PersonResource.java#L28)  
 
  5) Complete the addPerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman  
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L41)  
- [REST]()  
+ [REST](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/rest/PersonResource.java#L50)  
 
  6) Complete the editPerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman  
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L91)  
- [REST]()  
+ [REST](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/rest/PersonResource.java#L59)  
   
  7)  Complete the deletePerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman  
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L55)  
- [REST]()  
+ [REST](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/rest/PersonResource.java#L69)  
+
+
 
 
