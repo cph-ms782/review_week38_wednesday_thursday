@@ -94,7 +94,7 @@ public class PersonResourceTest {
     
     @Test
     public void testPersonNotFoundException() {
-        System.out.println("Testing is server UP");
+        System.out.println("Testing PersonNotFoundException");
         given()
                 .when()
                 .get("/person/121233")
