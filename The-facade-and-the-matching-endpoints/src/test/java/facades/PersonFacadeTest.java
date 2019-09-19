@@ -22,7 +22,7 @@ public class PersonFacadeTest {
     private static PersonFacade facade;
 
     private static Person p1 = new Person("a", "b", "c", LocalDate.of(2000, Month.JANUARY, 1));
-//    private static Person p2 = new Person("d", "e", "f", LocalDate.of(2010, Month.JULY, 15));
+    private static Person p2 = new Person("d", "e", "f", LocalDate.of(2010, Month.JULY, 15));
 
     public PersonFacadeTest() {
     }
@@ -37,11 +37,19 @@ public class PersonFacadeTest {
     public static void setUpClassV2() {
         emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST, Strategy.DROP_AND_CREATE);
         facade = PersonFacade.getPersonFacade(emf);
+    }
+
+    @AfterAll
+    public static void tearDownClass() {
+    }
+
+    // Setup the DataBase in a known state BEFORE EACH TEST
+    @BeforeEach
+    public void setUp() {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-//            em.persist(p2);
             em.persist(p1);
             em.getTransaction().commit();
         } finally {
@@ -49,31 +57,43 @@ public class PersonFacadeTest {
         }
     }
 
-    @AfterAll
-    public static void tearDownClass() {
-//        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
-    }
-
-    // Setup the DataBase in a known state BEFORE EACH TEST
-    @BeforeEach
-    public void setUp() {
-
-    }
-
     @AfterEach
     public void tearDown() {
-//        Remove any data after each test was run
+
     }
 
     @Test
     public void testGetPerson() {
         System.out.println("Test getPerson:");
-        assertEquals(p1, facade.getPerson(1), "Expects 2 persons to be the same");
+        assertEquals(p1, facade.getPerson(6), "Expects 2 persons to be the same");
     }
 
     @Test
     public void testGetAllPersons() {
         System.out.println("Test getAllPersons:");
+        assertEquals(1, facade.getAllPersons().size(), "Expects a list of 1 person");
+    }
+
+    @Test
+    public void testAddPerson() {
+        System.out.println("Test addPerson:");
+        facade.addPerson(
+                p2.getFirstName(),
+                p2.getLastName(),
+                p2.getPhone());
+        assertEquals(2, facade.getAllPersons().size(), "Expects a list of 2 persons");
+    }
+
+    @Test
+    public void testDeletePerson() {
+        System.out.println("Test deletePerson:");
+        facade.deletePerson(2);
+        assertEquals(0, facade.getAllPersons().size(), "Expects a list of 0 persons");
+    }
+
+    @Test
+    public void testEditPerson() {
+        System.out.println("Test editPerson:");
         assertEquals(1, facade.getAllPersons().size(), "Expects a list of 2 persons");
     }
 
