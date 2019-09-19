@@ -9,7 +9,7 @@ _**[Link]()**_
 _***Person DB created on localhost**_
 
  3) Implement a facade class that implements the IPersonFacade given above. Initially just add dummy methods, since we like you to implement the methods, step-by-step, including their matching REST-endpoints. When you implement the methods, make sure to create corresponding JUnit tests.  
-__
+[Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/master/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java)  
 
  4) Complete the GET methods in the facade, and implementing matching REST endpoints. Test via a browser or Postman (Rest Assured will be requested later).  
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L69)  
