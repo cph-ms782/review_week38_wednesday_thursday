@@ -1,9 +1,11 @@
 package facades;
 
 import entities.Person;
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -38,12 +40,30 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public Person addPerson(String fName, String lName, String phone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Person person = new Person(fName, lName, phone, LocalDate.now());
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(person);
+            em.getTransaction().commit();
+            return person;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public Person deletePerson(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Person p = em.find(Person.class, id);
+            em.remove(p);
+            em.getTransaction().commit();
+            return p;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -70,7 +90,18 @@ public class PersonFacade implements IPersonFacade {
 
     @Override
     public Person editPerson(Person p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Person pOriginal = em.find(Person.class, p.getId());
+            pOriginal.setFirstName(p.getFirstName());
+            pOriginal.setLastName(p.getLastName());
+            pOriginal.setPhone(p.getPhone());
+            em.getTransaction().commit();
+            return pOriginal;
+        } finally {
+            em.close();
+        }
     }
 
 }

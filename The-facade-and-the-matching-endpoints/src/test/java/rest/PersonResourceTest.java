@@ -89,7 +89,7 @@ public class PersonResourceTest {
     public void testId() throws Exception {
         given()
                 .contentType("application/json")
-                .get("/api/person/id/1").then()
+                .get("/api/person/1").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("data.firstName", equalTo("Hans"));

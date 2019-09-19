@@ -22,7 +22,7 @@ public class PersonFacadeTest {
     private static PersonFacade facade;
 
     private static Person p1 = new Person("a", "b", "c", LocalDate.of(2000, Month.JANUARY, 1));
-    private static Person p2 = new Person("d", "e", "f", LocalDate.of(2010, Month.JULY, 15));
+//    private static Person p2 = new Person("d", "e", "f", LocalDate.of(2010, Month.JULY, 15));
 
     public PersonFacadeTest() {
     }
@@ -41,7 +41,7 @@ public class PersonFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Person.deleteAllRows").executeUpdate();
-            em.persist(p2);
+//            em.persist(p2);
             em.persist(p1);
             em.getTransaction().commit();
         } finally {
@@ -68,13 +68,13 @@ public class PersonFacadeTest {
     @Test
     public void testGetPerson() {
         System.out.println("Test getPerson:");
-        assertEquals(p1, facade.getPerson(2), "Expects 2 persons to be the same");
+        assertEquals(p1, facade.getPerson(1), "Expects 2 persons to be the same");
     }
 
     @Test
     public void testGetAllPersons() {
         System.out.println("Test getAllPersons:");
-        assertEquals(2, facade.getAllPersons().size(), "Expects a list of 2 persons");
+        assertEquals(1, facade.getAllPersons().size(), "Expects a list of 2 persons");
     }
 
 }
