@@ -12,11 +12,19 @@ _***Person DB created on localhost**_
 __
 
  4) Complete the GET methods in the facade, and implementing matching REST endpoints. Test via a browser or Postman (Rest Assured will be requested later).  
+ [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L69)  
+ [REST]()  
 
  5) Complete the addPerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman  
+ [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L41)  
+ [REST]()  
 
  6) Complete the editPerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman  
-
- 7)  Complete the deletePerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman
+ [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L91)  
+ [REST]()  
+  
+ 7)  Complete the deletePerson(..) method in the facade, and implement a matching REST endpoint. Test using Postman  
+ [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L55)  
+ [REST]()  
 
 
