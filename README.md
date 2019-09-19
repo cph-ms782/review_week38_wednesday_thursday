@@ -2,8 +2,17 @@
 
 ## [REST with JAX RS](https://docs.google.com/document/d/19km0ZoaAX0k_stnYOWfAZPd4wXbTGMWhme1xZopj-PA/edit#)  
 ### The facade and the matching endpoints
+Læringsmål:
+
+  * Kunne demonstrere kode med grundlægende JPQL Queries  
+  * Kunne redegøre for konventioner ved opbygning af REST api'er  
+  * Kunne håndtere parametre i REST endpoints i egne kodeeksempler  
+  * Kunne implementere GET, POST, PUT og DELETE requests  
+  * Kunne redegøre for, og implementere DTO's og konvertere frem og tilbage mellem Java og JSON  
+  * Kunne vise med egne kodeeksempler, hvordan man håndterer POST med tilhørende JSON og får det deserialiseret til Java entiteter
+ 
+
  1) Use our start code as the starting point for this exercise. Initially, just skip the steps related to Travis and Deployment. It will provide you with a starting point for the Rest Assured tests you have to write.  
-_**[Link]()**_
 
  2) Create a person database and, either use your existing, or create a new test database for this exercise.  
 _***Person DB created on localhost**_
@@ -27,6 +36,15 @@ _***Person DB created on localhost**_
  [Facade](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/facades/PersonFacade.java#L55)  
  [REST](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/36f8cb6a6383d0e33e637f8983d4668a8534e855/The-facade-and-the-matching-endpoints/src/main/java/rest/PersonResource.java#L69)  
 
+### Error Handling with JAX RS and ExceptionMappers  
+1) Add the following Exceptions to the system  
+
+
+2) Change the interface (and implementation) as sketched  
+
+
+
+3) Test your error responses, first using Postman, and then with JUnit and Rest Assured.  
 
 
 

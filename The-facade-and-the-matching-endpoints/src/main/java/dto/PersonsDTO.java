@@ -1,33 +1,63 @@
 package dto;
 
 import entities.Person;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author msi
  */
-public class PersonDTO {
+public class PersonsDTO {
 
-    private long id;
-    private String fName;
-    private String lName;
-    private String phone;
+  List<PersonDTO> all = new ArrayList();
 
-    public PersonDTO(Person p) {
-        this.fName = p.getFirstName();
-        this.lName = p.getLastName();
-        this.phone = p.getPhone();
-        this.id = p.getId();
+    public PersonsDTO(List<Person> personEntities) {
+        personEntities.forEach((p) -> {
+            all.add(new PersonDTO(p));
+        });
     }
 
-    public PersonDTO(String fn, String ln, String phone) {
-        this.fName = fn;
-        this.lName = ln;
-        this.phone = phone;
+    public PersonsDTO() {
     }
 
-    public PersonDTO() {
+    public List<PersonDTO> getAll() {
+        return all;
     }
 
-    
+    public void setAll(List<PersonDTO> all) {
+        this.all = all;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.all);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PersonsDTO other = (PersonsDTO) obj;
+        if (!Objects.equals(this.all, other.all)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonsDTO{" + "all=" + all + '}';
+    }
+
 }

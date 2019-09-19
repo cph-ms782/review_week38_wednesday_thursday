@@ -2,8 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.PersonDTO;
+import dto.PersonsDTO;
 import entities.Person;
-import static entities.Person_.id;
 import utils.EMF_Creator;
 import facades.PersonFacade;
 import java.util.List;
@@ -36,7 +37,7 @@ public class PersonResource {
     @Path("{id}")
     public String getPerson(@PathParam("id") int id) {
         Person p = FACADE.getPerson(id);
-        return GSON.toJson(p);
+        return GSON.toJson(new PersonDTO(p));
     }
 
     @GET
@@ -44,7 +45,7 @@ public class PersonResource {
     @Path("all")
     public String getAllPersons() {
         List<Person> p = FACADE.getAllPersons();
-        return GSON.toJson(p);
+        return GSON.toJson(new PersonsDTO(p));
     }
 
     @POST
@@ -53,7 +54,7 @@ public class PersonResource {
     public String addPerson(String personAsJson) {
         Person newPerson = GSON.fromJson(personAsJson, Person.class);
         Person addedPerson = FACADE.addPerson(newPerson.getFirstName(), newPerson.getLastName(), newPerson.getPhone());
-        return GSON.toJson(addedPerson);
+        return GSON.toJson(new PersonDTO(addedPerson));
     }
 
     @PUT
@@ -63,7 +64,7 @@ public class PersonResource {
     public String editPerson(String personAsJson, @PathParam("id") int id) {
         Person newPerson = GSON.fromJson(personAsJson, Person.class);
         Person changedPerson = FACADE.editPerson(newPerson);
-        return GSON.toJson(changedPerson);
+        return GSON.toJson(new PersonDTO(changedPerson));
     }
     
     @DELETE

@@ -1,6 +1,7 @@
 package dto;
 
 import entities.Person;
+import java.util.Objects;
 
 /**
  *
@@ -29,5 +30,78 @@ public class PersonDTO {
     public PersonDTO() {
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.fName);
+        hash = 11 * hash + Objects.hashCode(this.lName);
+        hash = 11 * hash + Objects.hashCode(this.phone);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PersonDTO other = (PersonDTO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.fName, other.fName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lName, other.lName)) {
+            return false;
+        }
+        if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" + "id=" + id + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + '}';
+    }
     
 }
