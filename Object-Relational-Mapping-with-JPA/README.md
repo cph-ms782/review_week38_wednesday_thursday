@@ -20,7 +20,7 @@ _** **_
 ### Practical part
 
  3) Create a façade and implement as many of the methods below as you have time for, not necessarily in the given order:  
-_**Tester main class in TheFacade creates all of beneath exercises**_  
+_**The facade TheFacade.java has a main function at the bottom that creates all answers to exercises beneath**_  
 
   * [Create a Customer](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/eb6672acf8370b25b631722d322611178d2b12f5/Object-Relational-Mapping-with-JPA/src/main/java/facades/TheFacade.java#L205)  
   * [Find a Customer](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/eb6672acf8370b25b631722d322611178d2b12f5/Object-Relational-Mapping-with-JPA/src/main/java/facades/TheFacade.java#L212)  
