@@ -1,7 +1,9 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,8 +25,8 @@ public class ItemType implements Serializable {
     private String description;
     private double price;
     
-    @OneToMany(mappedBy = "itemType", cascade = CascadeType.PERSIST)
-    private List<OrderLine> orderLines;
+    @OneToMany(mappedBy = "itemType",cascade = CascadeType.PERSIST)
+    private List<OrderLine> orderLines = new ArrayList();
     
     public ItemType() {
     }
@@ -67,6 +69,31 @@ public class ItemType implements Serializable {
         this.price = price;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ItemType other = (ItemType) obj;
+        if (!Objects.equals(this.itemTypeID, other.itemTypeID)) {
+            return false;
+        }
+        return true;
+    }
+
+    
     @Override
     public String toString() {
         return "ItemType{" + "itemTypeID=" + itemTypeID + ", name=" + name + ", description=" + description + ", price=" + price + ", orderLines=" + orderLines + '}';

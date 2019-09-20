@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -67,6 +68,33 @@ public class OrderLine implements Serializable {
         this.itemType = itemType;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + Objects.hashCode(this.orderLineID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final OrderLine other = (OrderLine) obj;
+        if (!Objects.equals(this.orderLineID, other.orderLineID)) {
+            return false;
+        }
+        return true;
+    }
+
+
+    
     @Override
     public String toString() {
         return "OrderLine{" + "orderLineID=" + orderLineID + ", quantity=" + quantity + ", ordrer=" + ordrer + ", itemType=" + itemType + '}';

@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,10 +24,10 @@ public class Ordrer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer ordrerID;
 
-    @OneToMany(mappedBy = "ordrer")
+    @OneToMany(mappedBy = "ordrer", cascade = CascadeType.PERSIST)
     private List<OrderLine> orderLines = new ArrayList();
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
     private Customer customer;
 
@@ -58,6 +59,30 @@ public class Ordrer implements Serializable {
         if (ol.getOrdrer() != this) {
             ol.setOrdrer(this);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ordrer other = (Ordrer) obj;
+        if (!Objects.equals(this.ordrerID, other.ordrerID)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
