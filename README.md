@@ -46,4 +46,13 @@ For each of the REST-endpoints created above, implement one (or more) Rest Assur
 [Test for PersonNotFound](https://github.com/cph-ms782/review_week38_wednesday_thursday/blob/97e5cda26d26744e31dd0bbb42d989dc0f501c67/The-facade-and-the-matching-endpoints/src/test/java/rest/PersonResourceTest.java#L95)
 
 
+### Entity Classes with relations
+1) Create a new java class, entity class Address and create a few fields to represent an address (street, zip and city).  
+[New branch](https://github.com/cph-ms782/review_week38_wednesday_thursday/tree/EntityClasseswithrelations)
+
+2) Change all relevant places in the code to use this structure. If you delete a Person, also delete the Address since no one else “can live here” given the one-to-one relationship between the two.  
+
+
+3) Change the relationship between Person and Address, so that a Person still can have only one Address, but an Address can belong to several Persons (many-to-one, between Address and Person)  
+
 
