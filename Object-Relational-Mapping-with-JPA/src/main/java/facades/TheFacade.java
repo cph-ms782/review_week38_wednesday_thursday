@@ -246,7 +246,7 @@ public class TheFacade {
 
 //      Find all Orders, for a specific Customer
         List<Ordrer> oList = facade.getAllOrdersPerCustomer(1);
-        System.out.println("\nAll orders from customer #5:");
+        System.out.println("\nAll orders from customer #1:");
         double totalPrice = 0;
         for (Ordrer or : oList) {
             System.out.println("Order #" + or.getOrdrerID() + " - " + or.getCustomer());
