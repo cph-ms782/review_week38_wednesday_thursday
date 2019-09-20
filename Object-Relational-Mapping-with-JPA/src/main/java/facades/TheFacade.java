@@ -115,6 +115,23 @@ public class TheFacade {
     /**
      * ORD(R)ERS
      */
+    public Customer addOrdrerToCustomer(int id, Ordrer o) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Customer c = em.find(Customer.class, id);
+            c.addOrder(o);
+            em.persist(c);
+            em.getTransaction().commit();
+            return c;
+        } finally {
+            em.close();
+        }
+    }
+
+    /**
+     * ORD(R)ERS
+     */
     public Ordrer findOrdrer(int id) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -128,12 +145,17 @@ public class TheFacade {
     /**
      * ORD(R)ERS
      */
-    public Ordrer addOrdrerToCustomer(Customer c, Ordrer o) {
+    public Ordrer addOrderLineToOrder(int orderID, int orderLineQuantity, int itemTypeID) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            c.addOrder(o);
-            em.persist(c);
+            Ordrer o = em.find(Ordrer.class, orderID);
+            ItemType it = em.find(ItemType.class, itemTypeID);
+            OrderLine ol = new OrderLine(orderLineQuantity);
+            ol.setItemType(it);
+            em.persist(ol);
+            o.addOrderLine(ol);
+            em.persist(o);
             em.getTransaction().commit();
             return o;
         } finally {
@@ -210,25 +232,20 @@ public class TheFacade {
 
         // Create an Order and Add it to a Customer
         System.out.println("\nCreate an Order");
-        Customer cust = facade.findCustomer(1);
+        Ordrer o1 = new Ordrer();
+        Customer cust = facade.addOrdrerToCustomer(1, o1);
         System.out.println("Add order to customer: #" + cust.getCustomerID() + " "
                 + cust.getName());
-        Ordrer o1 = new Ordrer();
-        cust.addOrder(o1);
-        facade.addOrdrerToCustomer(cust, o1);     //trying to avoid making more customers in DB (not working)
-//        persisting(cust);                           // helper function containing the persist() part
 
         //Create an OrderLine for a specific ItemType, and add it to an Order
         System.out.println("\nCreating an OrderLine");
-        OrderLine ol = new OrderLine(4);
-        ol.setItemType(facade.findItemType(1));
-        Ordrer o = facade.findOrdrer(1);            // Ordrer using #1 to save time
-        o.addOrderLine(ol);
 
-        persisting(o);
+        facade.addOrderLineToOrder(1, 4, 2);              // order#, quantity, itemtype#
+        facade.addOrderLineToOrder(1, 2, 1);              // Ordrer/itemtype using madeup numbers to save time
+        facade.addOrderLineToOrder(1, 5, 4);
 
 //      Find all Orders, for a specific Customer
-        List<Ordrer> oList = facade.getAllOrdersPerCustomer(5);
+        List<Ordrer> oList = facade.getAllOrdersPerCustomer(1);
         System.out.println("\nAll orders from customer #5:");
         double totalPrice = 0;
         for (Ordrer or : oList) {
@@ -236,30 +253,19 @@ public class TheFacade {
 
 //      Find the total price of an order   
             List<OrderLine> ol1List = facade.getTotalOrderPrice(or.getOrdrerID());
+            System.out.println("Orderline price:");
             for (OrderLine orderLine : ol1List) {
                 int quantity = orderLine.getQuantity();
                 double price = orderLine.getItemType().getPrice();
                 totalPrice += quantity * price;
-                System.out.println("Orderline price: " + quantity
-                        + " x " + price + " kr."
+                System.out.println(quantity
+                        + " x " + orderLine.getItemType().getName()
+                        + " á " + price + " kr."
                         + " = " + quantity * price + " kr.");
             }
-
         }
         System.out.println("Order total price: " + totalPrice + " kr.");
 
-    }
-
-    private static void persisting(Object cust) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(cust);
-            em.getTransaction().commit();
-
-        } finally {
-            em.close();
-        }
     }
 
 }
