@@ -8,13 +8,14 @@
 
 #### General part
  * Explain the rationale behind the topic Object Relational Mapping and the Pros and Cons in using ORM  
-_** **_  
+_**It reduces the amount of "tedious" mapper code**_  
 
  * Explain the JPA strategy for handling Object Relational Mapping and important classes/annotations involved.  
-_** **_  
+_**JPA uses simple entity classes to map/mimic database content.  
+It uses the annotation @Entity to declare a class a JPA enity**_  
 
  * Outline some of the fundamental differences in Database handling using plain JDBC versus JPA  
-_** **_  
+_**When using JDBC there's a lot of "tedious" code using a lot of variables. Prone to errors. With JPA that layer is gone and there's "only" the enitities and som SQL like  queries. **_  
 
 
 ### Practical part
