@@ -16,7 +16,7 @@ It uses the annotation @Entity to declare a class a JPA enity**_
 
  * Outline some of the fundamental differences in Database handling using plain JDBC versus JPA  
 _**When using JDBC there's a lot of "tedious" code using a lot of variables. Prone to errors.  
-With JPA that layer is gone and there's "only" the enitities and som SQL like  queries.**_  
+With JPA that layer is gone and there's "only" the enitities and some SQL-like queries.**_  
 
 
 ### Practical part
